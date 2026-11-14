@@ -873,6 +873,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Parallax2D" type="Parallax2D" parent="GUI" unique_id=888418679]
+
 [node name="Tiles" type="Node2D" parent="." unique_id=219864230]
 
 [node name="outpostBack" type="TileMapLayer" parent="Tiles" unique_id=1011274715]
