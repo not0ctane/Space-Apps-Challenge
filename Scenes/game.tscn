@@ -260,3 +260,9 @@ position = Vector2(503, 298)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_8m3t6")
 animation = &"idle"
+
+[node name="Tiles" type="Node2D" parent="." unique_id=219864230]
+
+[node name="moonGround" type="TileMapLayer" parent="Tiles" unique_id=1580345375]
+
+[node name="outpost" type="TileMapLayer" parent="Tiles" unique_id=1542748250]
