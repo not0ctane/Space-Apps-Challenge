@@ -868,6 +868,11 @@ offset_right = 1283.0
 offset_bottom = 719.0
 color = Color(0.1882353, 0.38431373, 0.1882353, 1)
 
+[node name="stats" type="Control" parent="GUI" unique_id=692434995]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="Tiles" type="Node2D" parent="." unique_id=219864230]
 
 [node name="outpostBack" type="TileMapLayer" parent="Tiles" unique_id=1011274715]
