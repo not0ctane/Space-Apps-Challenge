@@ -1393,6 +1393,11 @@ position = Vector2(160, 608)
 [node name="spawnMercury" type="Node2D" parent="spawns" unique_id=1829089097]
 position = Vector2(224, 480)
 
+[node name="timers" type="Node" parent="." unique_id=1334601868]
+
+[node name="timerStartGame" type="Timer" parent="timers" unique_id=475727542]
+wait_time = 20.0
+
 [connection signal="mouse_entered" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_entered"]
 [connection signal="mouse_exited" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_exited"]
 [connection signal="button_down" from="Characters/Apollo/Button" to="Characters/Apollo" method="_on_button_button_down"]

@@ -9,8 +9,10 @@ var character_slots := {}
 
 var start_game = false
 
+
 func _process(delta: float) -> void:
 	
+	#This part starts the game
 	if character_slots.size() == 4 and not start_game:
 		print("game can start now!")
 		start_game = true
