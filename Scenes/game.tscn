@@ -1330,6 +1330,12 @@ position = Vector2(1008, 456)
 shape = SubResource("RectangleShape2D_22asu")
 debug_color = Color(0.99845654, 0, 0.15305063, 0.41960785)
 
+[node name="spawns" type="Node2D" parent="." unique_id=913900422]
+
+[node name="spawnApollo" type="Node2D" parent="spawns" unique_id=295618018]
+position = Vector2(224, 608)
+scale = Vector2(4, 4)
+
 [connection signal="mouse_entered" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_entered"]
 [connection signal="mouse_exited" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_exited"]
 [connection signal="button_down" from="Characters/Apollo/Button" to="Characters/Apollo" method="_on_button_button_down"]
