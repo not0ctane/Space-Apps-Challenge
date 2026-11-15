@@ -1186,7 +1186,7 @@ script = ExtResource("11_nb51f")
 [node name="Apollo" type="AnimatedSprite2D" parent="Characters" unique_id=1571926405]
 z_index = 1
 texture_filter = 1
-position = Vector2(224, 608)
+position = Vector2(736, 736)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_rfjv2")
 animation = &"idle"
@@ -1273,31 +1273,79 @@ mouse_filter = 1
 
 [node name="GameAreas" type="Node2D" parent="." unique_id=615153862]
 
-[node name="supportArea" type="Area2D" parent="GameAreas" unique_id=1946725058]
+[node name="supportArea" type="Area2D" parent="GameAreas" unique_id=1946725058 groups=["zone"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/supportArea" unique_id=349500946]
 position = Vector2(720, 288)
 shape = SubResource("RectangleShape2D_nnt18")
 
-[node name="scienceArea" type="Area2D" parent="GameAreas" unique_id=1743347028]
+[node name="supportPosition" type="Node2D" parent="GameAreas/supportArea" unique_id=2080769325 groups=["slot"]]
+position = Vector2(736, 400)
+
+[node name="supportPosition2" type="Node2D" parent="GameAreas/supportArea" unique_id=1207988662 groups=["slot"]]
+position = Vector2(672, 400)
+
+[node name="supportPosition3" type="Node2D" parent="GameAreas/supportArea" unique_id=555064684 groups=["slot"]]
+position = Vector2(608, 400)
+
+[node name="supportPosition4" type="Node2D" parent="GameAreas/supportArea" unique_id=1429554372 groups=["slot"]]
+position = Vector2(800, 400)
+
+[node name="scienceArea" type="Area2D" parent="GameAreas" unique_id=1743347028 groups=["zone"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/scienceArea" unique_id=840663118]
 position = Vector2(1292, 288)
 shape = SubResource("RectangleShape2D_ewbju")
 
-[node name="energyArea" type="Area2D" parent="GameAreas" unique_id=252319000]
+[node name="sciencePosition" type="Node2D" parent="GameAreas/scienceArea" unique_id=645524908 groups=["slot"]]
+position = Vector2(1312, 400)
+
+[node name="sciencePosition2" type="Node2D" parent="GameAreas/scienceArea" unique_id=1480880108 groups=["slot"]]
+position = Vector2(1248, 400)
+
+[node name="sciencePosition3" type="Node2D" parent="GameAreas/scienceArea" unique_id=509915173 groups=["slot"]]
+position = Vector2(1376, 400)
+
+[node name="sciencePosition4" type="Node2D" parent="GameAreas/scienceArea" unique_id=1547345575 groups=["slot"]]
+position = Vector2(1184, 400)
+
+[node name="energyArea" type="Area2D" parent="GameAreas" unique_id=252319000 groups=["zone"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/energyArea" unique_id=1324959374]
 position = Vector2(720, 624)
 shape = SubResource("RectangleShape2D_85qyi")
 
-[node name="shieldArea" type="Area2D" parent="GameAreas" unique_id=1338011757]
+[node name="energyPosition" type="Node2D" parent="GameAreas/energyArea" unique_id=952326476 groups=["slot"]]
+position = Vector2(736, 736)
+
+[node name="energyPosition2" type="Node2D" parent="GameAreas/energyArea" unique_id=591389563 groups=["slot"]]
+position = Vector2(608, 736)
+
+[node name="energyPosition3" type="Node2D" parent="GameAreas/energyArea" unique_id=977273236 groups=["slot"]]
+position = Vector2(672, 736)
+
+[node name="energyPosition4" type="Node2D" parent="GameAreas/energyArea" unique_id=2068709910 groups=["slot"]]
+position = Vector2(800, 736)
+
+[node name="shieldArea" type="Area2D" parent="GameAreas" unique_id=1338011757 groups=["zone"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/shieldArea" unique_id=1362081176]
 position = Vector2(1296, 624)
 shape = SubResource("RectangleShape2D_iivbl")
 
-[node name="outofbound" type="Area2D" parent="GameAreas" unique_id=1668218509 groups=["outbound"]]
+[node name="shieldPosition" type="Node2D" parent="GameAreas/shieldArea" unique_id=1843798119 groups=["slot"]]
+position = Vector2(1312, 736)
+
+[node name="shieldPosition2" type="Node2D" parent="GameAreas/shieldArea" unique_id=1219618867 groups=["slot"]]
+position = Vector2(1184, 736)
+
+[node name="shieldPosition3" type="Node2D" parent="GameAreas/shieldArea" unique_id=1337865274 groups=["slot"]]
+position = Vector2(1248, 736)
+
+[node name="shieldPosition4" type="Node2D" parent="GameAreas/shieldArea" unique_id=227071982 groups=["slot"]]
+position = Vector2(1376, 736)
+
+[node name="outofbound" type="Area2D" parent="GameAreas" unique_id=1668218509 groups=["zone"]]
 modulate = Color(1, 1, 1, 0.17254902)
 
 [node name="col1" type="CollisionShape2D" parent="GameAreas/outofbound" unique_id=1339403537]
