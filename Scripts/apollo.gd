@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 
 var drag = false
 var off = Vector2.ZERO
+@onready var apollo_area: Area2D = $apolloArea
 
 func _process(delta: float) -> void:
 	if drag:
@@ -16,4 +17,9 @@ func _on_button_button_down() -> void:
 
 func _on_button_button_up() -> void:
 	drag = false
+	for a in apollo_area.get_overlapping_areas():
+		if a.is_in_group("outbound"):
+			print("Back to the spawn")
+			# aquí puedes regresarlo al spawn
+			break
 	pass # Replace with function body.
