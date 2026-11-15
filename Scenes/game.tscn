@@ -16,6 +16,10 @@
 [ext_resource type="Texture2D" uid="uid://0s1fwr44plna" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/tileset-elevator-16x16.png" id="7_ldgsr"]
 [ext_resource type="Texture2D" uid="uid://bore3p1nnits8" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/tilesets-platforms-16x16.png" id="8_o5yvi"]
 [ext_resource type="Script" uid="uid://bq7jp6r8eincu" path="res://Scripts/characters.gd" id="11_nb51f"]
+[ext_resource type="Script" uid="uid://balbsk7f3ey0y" path="res://Scripts/apollo.gd" id="12_nb51f"]
+[ext_resource type="Script" uid="uid://dim626gwjqp3" path="res://Scripts/christina.gd" id="16_85qyi"]
+[ext_resource type="Script" uid="uid://lqfufpncvdjo" path="res://Scripts/mercury.gd" id="18_iivbl"]
+[ext_resource type="Script" uid="uid://68bu4xc7cixb" path="res://Scripts/frank.gd" id="20_7nbq1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8m3t6"]
 atlas = ExtResource("1_1phco")
@@ -686,6 +690,14 @@ sources/2 = SubResource("TileSetAtlasSource_nnt18")
 atlas = ExtResource("1_3dryh")
 region = Rect2(0, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_oeip8"]
+atlas = ExtResource("1_3dryh")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xe308"]
+atlas = ExtResource("1_3dryh")
+region = Rect2(16, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_h4fw4"]
 atlas = ExtResource("1_3dryh")
 region = Rect2(64, 16, 16, 16)
@@ -710,7 +722,18 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oeip8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xe308")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 2.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -743,6 +766,14 @@ height = 16.0
 atlas = ExtResource("2_wowpa")
 region = Rect2(0, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3cha"]
+atlas = ExtResource("2_wowpa")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i26dy"]
+atlas = ExtResource("2_wowpa")
+region = Rect2(16, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_nb51f"]
 atlas = ExtResource("2_wowpa")
 region = Rect2(80, 16, 16, 16)
@@ -768,6 +799,17 @@ animations = [{
 "loop": true,
 "name": &"idle",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d3cha")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i26dy")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 4.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -800,6 +842,14 @@ height = 16.0
 atlas = ExtResource("3_i6g32")
 region = Rect2(0, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ym3tv"]
+atlas = ExtResource("3_i6g32")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwj6o"]
+atlas = ExtResource("3_i6g32")
+region = Rect2(16, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_exi56"]
 atlas = ExtResource("3_i6g32")
 region = Rect2(80, 16, 16, 16)
@@ -824,6 +874,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ym3tv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwj6o")
+}],
+"loop": true,
+"name": &"moving",
 "speed": 5.0
 }, {
 "frames": [{
@@ -857,6 +918,14 @@ height = 16.0
 atlas = ExtResource("4_1l0tm")
 region = Rect2(0, 16, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmoi6"]
+atlas = ExtResource("4_1l0tm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6uxt2"]
+atlas = ExtResource("4_1l0tm")
+region = Rect2(16, 0, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_81klo"]
 atlas = ExtResource("4_1l0tm")
 region = Rect2(80, 16, 16, 16)
@@ -881,6 +950,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lmoi6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6uxt2")
+}],
+"loop": true,
+"name": &"moving",
 "speed": 5.0
 }, {
 "frames": [{
@@ -1092,11 +1172,19 @@ position = Vector2(224, 608)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_rfjv2")
 animation = &"idle"
+script = ExtResource("12_nb51f")
 
 [node name="apolloArea" type="Area2D" parent="Characters/Apollo" unique_id=270961571]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Characters/Apollo/apolloArea" unique_id=1315854533]
 shape = SubResource("CapsuleShape2D_1phco")
+
+[node name="Button" type="Button" parent="Characters/Apollo" unique_id=456103681]
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+mouse_filter = 1
 
 [node name="Christina" type="AnimatedSprite2D" parent="Characters" unique_id=991103121]
 z_index = 1
@@ -1105,11 +1193,19 @@ position = Vector2(160, 480)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_iivbl")
 animation = &"idle"
+script = ExtResource("16_85qyi")
 
 [node name="chrisArea" type="Area2D" parent="Characters/Christina" unique_id=1792545302]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Characters/Christina/chrisArea" unique_id=1459814124]
 shape = SubResource("CapsuleShape2D_nb51f")
+
+[node name="chrisButton" type="Button" parent="Characters/Christina" unique_id=94221607]
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+mouse_filter = 1
 
 [node name="Mercury" type="AnimatedSprite2D" parent="Characters" unique_id=1102193775]
 z_index = 1
@@ -1117,12 +1213,20 @@ texture_filter = 1
 position = Vector2(224, 480)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_22asu")
-animation = &"idle"
+animation = &"moving"
+script = ExtResource("18_iivbl")
 
 [node name="mercuryArea" type="Area2D" parent="Characters/Mercury" unique_id=994193272]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Characters/Mercury/mercuryArea" unique_id=2112094361]
 shape = SubResource("CapsuleShape2D_nnt18")
+
+[node name="mercuryButton" type="Button" parent="Characters/Mercury" unique_id=1064822823]
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+mouse_filter = 1
 
 [node name="Frank" type="AnimatedSprite2D" parent="Characters" unique_id=1296925204]
 z_index = 1
@@ -1130,12 +1234,20 @@ texture_filter = 1
 position = Vector2(160, 608)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_8m3t6")
-animation = &"idle"
+animation = &"moving"
+script = ExtResource("20_7nbq1")
 
 [node name="frankArea" type="Area2D" parent="Characters/Frank" unique_id=1474738655]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Characters/Frank/frankArea" unique_id=485292823]
 shape = SubResource("CapsuleShape2D_ewbju")
+
+[node name="frankButton" type="Button" parent="Characters/Frank" unique_id=101426331]
+offset_left = -6.0
+offset_top = -6.0
+offset_right = 6.0
+offset_bottom = 6.0
+mouse_filter = 1
 
 [node name="GameAreas" type="Node2D" parent="." unique_id=615153862]
 
@@ -1165,9 +1277,17 @@ shape = SubResource("RectangleShape2D_iivbl")
 
 [connection signal="mouse_entered" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_entered"]
 [connection signal="mouse_exited" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_exited"]
+[connection signal="button_down" from="Characters/Apollo/Button" to="Characters/Apollo" method="_on_button_button_down"]
+[connection signal="button_up" from="Characters/Apollo/Button" to="Characters/Apollo" method="_on_button_button_up"]
 [connection signal="mouse_entered" from="Characters/Christina/chrisArea" to="Characters" method="_on_chris_area_mouse_entered"]
 [connection signal="mouse_exited" from="Characters/Christina/chrisArea" to="Characters" method="_on_chris_area_mouse_exited"]
+[connection signal="button_down" from="Characters/Christina/chrisButton" to="Characters/Christina" method="_on_chris_button_button_down"]
+[connection signal="button_up" from="Characters/Christina/chrisButton" to="Characters/Christina" method="_on_chris_button_button_up"]
 [connection signal="mouse_entered" from="Characters/Mercury/mercuryArea" to="Characters" method="_on_mercury_area_mouse_entered"]
 [connection signal="mouse_exited" from="Characters/Mercury/mercuryArea" to="Characters" method="_on_mercury_area_mouse_exited"]
+[connection signal="button_down" from="Characters/Mercury/mercuryButton" to="Characters/Mercury" method="_on_mercury_button_button_down"]
+[connection signal="button_up" from="Characters/Mercury/mercuryButton" to="Characters/Mercury" method="_on_mercury_button_button_up"]
 [connection signal="mouse_entered" from="Characters/Frank/frankArea" to="Characters" method="_on_frank_area_mouse_entered"]
 [connection signal="mouse_exited" from="Characters/Frank/frankArea" to="Characters" method="_on_frank_area_mouse_exited"]
+[connection signal="button_down" from="Characters/Frank/frankButton" to="Characters/Frank" method="_on_frank_button_button_down"]
+[connection signal="button_up" from="Characters/Frank/frankButton" to="Characters/Frank" method="_on_frank_button_button_up"]
