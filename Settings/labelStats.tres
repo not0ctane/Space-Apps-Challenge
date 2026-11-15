@@ -1,4 +1,7 @@
 [gd_resource type="LabelSettings" format=3 uid="uid://b11qcjg1vwo46"]
 
+[ext_resource type="FontFile" uid="uid://b16l63mi285k5" path="res://Fonts/m6x11plus.ttf" id="1_4sikc"]
+
 [resource]
+font = ExtResource("1_4sikc")
 font_size = 25

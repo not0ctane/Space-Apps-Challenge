@@ -9,11 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://c4s444apronlb" path="res://Sprites/Edited/kosmonaut_girl-edited.png" id="2_wowpa"]
 [ext_resource type="Texture2D" uid="uid://qkeai0aoeb56" path="res://Sprites/Edited/kosmonaut_eva-edited.png" id="3_i6g32"]
 [ext_resource type="Texture2D" uid="uid://knv84cxo8ua6" path="res://Sprites/Edited/kosmonaut-edited.png" id="4_1l0tm"]
+[ext_resource type="FontFile" uid="uid://b16l63mi285k5" path="res://Fonts/m6x11plus.ttf" id="4_nnt18"]
 [ext_resource type="Texture2D" uid="uid://cfjxih8k2i7u0" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/animated tiles-water-blue-16x16.png" id="5_v158k"]
 [ext_resource type="Texture2D" uid="uid://tbwu0vsua4ch" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/tileset-platforms-3-16x16.png" id="6_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://d4luftph65cid" path="res://Sprites/Space/Planet Textures/GreenPlanet.png" id="6_rfjv2"]
 [ext_resource type="Texture2D" uid="uid://0s1fwr44plna" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/tileset-elevator-16x16.png" id="7_ldgsr"]
 [ext_resource type="Texture2D" uid="uid://bore3p1nnits8" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/tilesets-platforms-16x16.png" id="8_o5yvi"]
+[ext_resource type="Script" uid="uid://bq7jp6r8eincu" path="res://Scripts/characters.gd" id="11_nb51f"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8m3t6"]
 atlas = ExtResource("1_1phco")
@@ -32,7 +34,14 @@ atlas = ExtResource("1_rku1e")
 region = Rect2(3, 35, 26, 23)
 
 [sub_resource type="LabelSettings" id="LabelSettings_rku1e"]
-font_size = 20
+font = ExtResource("4_nnt18")
+font_size = 35
+font_color = Color(0.8901961, 0.9607843, 0.8392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1phco"]
+font = ExtResource("4_nnt18")
+font_size = 35
+font_color = Color(0.89014935, 0.9626884, 0.8403069, 1)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ese38"]
 atlas = ExtResource("1_1phco")
@@ -726,6 +735,10 @@ animations = [{
 "speed": 2.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1phco"]
+radius = 6.0
+height = 16.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_1phco"]
 atlas = ExtResource("2_wowpa")
 region = Rect2(0, 16, 16, 16)
@@ -778,6 +791,10 @@ animations = [{
 "name": &"movingRight",
 "speed": 5.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nb51f"]
+radius = 6.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7nbq1"]
 atlas = ExtResource("3_i6g32")
@@ -832,6 +849,10 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nnt18"]
+radius = 6.0
+height = 16.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_fkdbe"]
 atlas = ExtResource("4_1l0tm")
 region = Rect2(0, 16, 16, 16)
@@ -884,6 +905,22 @@ animations = [{
 "name": &"movingRight",
 "speed": 5.0
 }]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ewbju"]
+radius = 6.0
+height = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnt18"]
+size = Vector2(480, 288)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ewbju"]
+size = Vector2(472, 288)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_85qyi"]
+size = Vector2(480, 288)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iivbl"]
+size = Vector2(480, 288)
 
 [node name="Game" type="Node" unique_id=1568055481]
 
@@ -967,7 +1004,8 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="yourStats" type="Label" parent="GUI/labels" unique_id=1940843539]
+[node name="yourResourcesLabel" type="Label" parent="GUI/labels" unique_id=1940843539]
+texture_filter = 1
 layout_mode = 0
 offset_left = 112.0
 offset_top = 72.0
@@ -975,6 +1013,18 @@ offset_right = 286.0
 offset_bottom = 100.0
 text = "YOUR RESOURCES"
 label_settings = SubResource("LabelSettings_rku1e")
+
+[node name="mainMonitorLabel" type="Label" parent="GUI/labels" unique_id=1996891672]
+z_index = 1
+texture_filter = 1
+layout_mode = 0
+offset_left = 88.0
+offset_top = 392.0
+offset_right = 303.0
+offset_bottom = 427.0
+text = "BEGIN YOUR DAY!"
+label_settings = SubResource("LabelSettings_1phco")
+horizontal_alignment = 1
 
 [node name="mainMonitor" type="Control" parent="GUI" unique_id=2071721144]
 anchors_preset = 0
@@ -984,8 +1034,8 @@ offset_bottom = 40.0
 [node name="mainSprite" type="Sprite2D" parent="GUI/mainMonitor" unique_id=1652055499]
 z_index = 1
 texture_filter = 1
-position = Vector2(204, 512)
-scale = Vector2(11.999998, 12.8)
+position = Vector2(191.99998, 512)
+scale = Vector2(11.199999, 12.8)
 texture = SubResource("AtlasTexture_ese38")
 
 [node name="backgroundParallax" type="Parallax2D" parent="GUI" unique_id=888418679]
@@ -1033,35 +1083,91 @@ tile_set = SubResource("TileSet_ewbju")
 metadata/_edit_lock_ = true
 
 [node name="Characters" type="Node2D" parent="." unique_id=1613192444]
+script = ExtResource("11_nb51f")
 
 [node name="Apollo" type="AnimatedSprite2D" parent="Characters" unique_id=1571926405]
 z_index = 1
 texture_filter = 1
-position = Vector2(288, 608)
+position = Vector2(224, 608)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_rfjv2")
 animation = &"idle"
 
+[node name="apolloArea" type="Area2D" parent="Characters/Apollo" unique_id=270961571]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Characters/Apollo/apolloArea" unique_id=1315854533]
+shape = SubResource("CapsuleShape2D_1phco")
+
 [node name="Christina" type="AnimatedSprite2D" parent="Characters" unique_id=991103121]
 z_index = 1
 texture_filter = 1
-position = Vector2(96, 480)
+position = Vector2(160, 480)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_iivbl")
 animation = &"idle"
 
+[node name="chrisArea" type="Area2D" parent="Characters/Christina" unique_id=1792545302]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Characters/Christina/chrisArea" unique_id=1459814124]
+shape = SubResource("CapsuleShape2D_nb51f")
+
 [node name="Mercury" type="AnimatedSprite2D" parent="Characters" unique_id=1102193775]
 z_index = 1
 texture_filter = 1
-position = Vector2(288, 480)
+position = Vector2(224, 480)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_22asu")
 animation = &"idle"
 
+[node name="mercuryArea" type="Area2D" parent="Characters/Mercury" unique_id=994193272]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Characters/Mercury/mercuryArea" unique_id=2112094361]
+shape = SubResource("CapsuleShape2D_nnt18")
+
 [node name="Frank" type="AnimatedSprite2D" parent="Characters" unique_id=1296925204]
 z_index = 1
 texture_filter = 1
-position = Vector2(96, 608)
+position = Vector2(160, 608)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_8m3t6")
 animation = &"idle"
+
+[node name="frankArea" type="Area2D" parent="Characters/Frank" unique_id=1474738655]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Characters/Frank/frankArea" unique_id=485292823]
+shape = SubResource("CapsuleShape2D_ewbju")
+
+[node name="GameAreas" type="Node2D" parent="." unique_id=615153862]
+
+[node name="supportArea" type="Area2D" parent="GameAreas" unique_id=1946725058]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/supportArea" unique_id=349500946]
+position = Vector2(720, 288)
+shape = SubResource("RectangleShape2D_nnt18")
+
+[node name="scienceArea" type="Area2D" parent="GameAreas" unique_id=1743347028]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/scienceArea" unique_id=840663118]
+position = Vector2(1292, 288)
+shape = SubResource("RectangleShape2D_ewbju")
+
+[node name="energyArea" type="Area2D" parent="GameAreas" unique_id=252319000]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/energyArea" unique_id=1324959374]
+position = Vector2(720, 624)
+shape = SubResource("RectangleShape2D_85qyi")
+
+[node name="shieldArea" type="Area2D" parent="GameAreas" unique_id=1338011757]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/shieldArea" unique_id=1362081176]
+position = Vector2(1296, 624)
+shape = SubResource("RectangleShape2D_iivbl")
+
+[connection signal="mouse_entered" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_entered"]
+[connection signal="mouse_exited" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_exited"]
+[connection signal="mouse_entered" from="Characters/Christina/chrisArea" to="Characters" method="_on_chris_area_mouse_entered"]
+[connection signal="mouse_exited" from="Characters/Christina/chrisArea" to="Characters" method="_on_chris_area_mouse_exited"]
+[connection signal="mouse_entered" from="Characters/Mercury/mercuryArea" to="Characters" method="_on_mercury_area_mouse_entered"]
+[connection signal="mouse_exited" from="Characters/Mercury/mercuryArea" to="Characters" method="_on_mercury_area_mouse_exited"]
+[connection signal="mouse_entered" from="Characters/Frank/frankArea" to="Characters" method="_on_frank_area_mouse_entered"]
+[connection signal="mouse_exited" from="Characters/Frank/frankArea" to="Characters" method="_on_frank_area_mouse_exited"]
