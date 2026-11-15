@@ -1186,7 +1186,7 @@ script = ExtResource("11_nb51f")
 [node name="Apollo" type="AnimatedSprite2D" parent="Characters" unique_id=1571926405]
 z_index = 1
 texture_filter = 1
-position = Vector2(736, 736)
+position = Vector2(224, 608)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_rfjv2")
 animation = &"idle"
@@ -1383,6 +1383,15 @@ debug_color = Color(0.99845654, 0, 0.15305063, 0.41960785)
 [node name="spawnApollo" type="Node2D" parent="spawns" unique_id=295618018]
 position = Vector2(224, 608)
 scale = Vector2(4, 4)
+
+[node name="spawnChristina" type="Node2D" parent="spawns" unique_id=449909890]
+position = Vector2(160, 480)
+
+[node name="spawnFrank" type="Node2D" parent="spawns" unique_id=1277871858]
+position = Vector2(160, 608)
+
+[node name="spawnMercury" type="Node2D" parent="spawns" unique_id=1829089097]
+position = Vector2(224, 480)
 
 [connection signal="mouse_entered" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_entered"]
 [connection signal="mouse_exited" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_exited"]

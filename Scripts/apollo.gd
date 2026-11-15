@@ -10,9 +10,11 @@ func _ready() -> void:
 	self.global_position = spawn_apollo.global_position
 
 func _process(delta: float) -> void:
+	#MOVES THE CHARACTER 
 	if drag:
 		position = get_global_mouse_position() - off
 	pass
+	
 # DRAG AND DROP ---------------------------------
 func _on_button_button_down() -> void:
 	drag = true
@@ -20,7 +22,10 @@ func _on_button_button_down() -> void:
 	GlobalScript.release_slot(self)
 	pass # Replace with function body.
 
+# SLOT SYSTEM ----------------------------------------
 func _on_button_button_up() -> void:
+	
+	#DETECTS IF THE CHARACTER IS IN A WRONG AREA
 	drag = false
 	for a in apollo_area.get_overlapping_areas():
 		if a.is_in_group("outbound"):
