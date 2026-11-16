@@ -23,6 +23,15 @@ var maxSupport = 8
 var maxEnergy = 6
 var maxShield = 10
 
+var prodScience = 0
+var prodSupp = 0
+var prodEnergy = 0
+var prodShield = 0
+
+var multSupp = 1
+var multEnergy = 1
+var multShield = 1
+
 #Nivel actual de cada mejora
 var supportLevel = 1
 var energyLevel = 1
@@ -30,6 +39,12 @@ var shieldLevel = 1
 
 var area_counts := {}  # {"nombreDelArea": cantidad}
 
+const MAX_LEVEL := 3
+
+# Índice 0 = nivel 1, índice 1 = nivel 2, índice 2 = nivel 3
+const ENERGY_MULT  := [1.0, 1.5, 1.75]   # producción de paneles
+const SUPPORT_MULT := [1.0, 2.0, 3.0]    # reciclaje de soporte vital
+const SHIELD_DAMAGE := [3, 2, 1]         # daño máximo de radiación
 
 func _ready() -> void:
 	pass
@@ -95,3 +110,14 @@ func _update_area_counts() -> void:
 	for slot in character_slots.values():
 		var area_name = slot.get_parent().name
 		area_counts[area_name] += 1
+		
+		
+#UPGRADE LEVELS (UPDATED)
+func get_energy_mult() -> float:
+	return ENERGY_MULT[energyLevel - 1]
+
+func get_support_mult() -> float:
+	return SUPPORT_MULT[supportLevel - 1]
+
+func get_shield_damage() -> int:
+	return SHIELD_DAMAGE[shieldLevel - 1]
