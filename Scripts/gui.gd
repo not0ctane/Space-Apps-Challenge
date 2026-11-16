@@ -13,10 +13,11 @@ func _ready() -> void:
 	pass # Replace with function body.
 	
 func _process(delta: float) -> void:
-	if GlobalScript.start_game and GlobalScript.character_slots.size() == 4 and not game_started:
-		start_button.show()
-	else:
-		start_button.hide()
+	var puede_iniciar = GlobalScript.start_game \
+		and GlobalScript.character_slots.size() == 4 \
+		and not game_started \
+		and not GlobalScript.inRocketMenu
+	start_button.visible = puede_iniciar
 	pass
 	
 func _on_start_button_button_down() -> void:

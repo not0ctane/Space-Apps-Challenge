@@ -18,10 +18,18 @@ extends Node
 @onready var point_science: Label = $GUI/labels/pointScience
 @onready var point_shield: Label = $GUI/labels/pointShield
 
+#BUTTON TO START THE GAME
+@onready var start_button: Button = $GUI/buttons/startButton
 
 @onready var day_number: Label = $GUI/labels/dayNumber
 
 @onready var event_label: Label = $GUI/labels/eventLabel
+
+#UPGRADE BUTTONS
+@onready var upgrade_area_supp: Control = $GameAreas/supportArea/upgradeAreaSupp
+@onready var upgrade_area_energy: Control = $GameAreas/energyArea/upgradeAreaEnergy
+@onready var upgrade_area_shield: Control = $GameAreas/shieldArea/upgradeAreaShield
+
 
 #MENUS
 @onready var menu_rocket: ColorRect = $GUI/rocketMenu/menu
@@ -32,6 +40,13 @@ extends Node
 @onready var main_monitor_label: Label = $GUI/labels/mainMonitorLabel
 @onready var next_menu_button: Button = $GUI/buttons/nextMenuButton
 
+@onready var not_upgraded_label: Label = $GUI/rocketMenu/menu/notUpgradedLabel
+
+
+#ROCKET MAIN
+@onready var select_upgrade_label: Label = $GUI/rocketMenu/menu/selectUpgradeLabel
+
+
 var gameDurationTimer = false
 
 var showingAstronauts = true
@@ -39,6 +54,12 @@ var showingAstronauts = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	select_upgrade_label.hide()
+	
+	if GlobalScript.allAreasMax:
+		select_upgrade_label.show()
+	_remove_maxed_buttons()
 	
 	GlobalScript.prodEnergy = 0
 	GlobalScript.prodScience = 0
@@ -81,18 +102,10 @@ func _process(delta: float) -> void:
 #DAY DURATION
 func _on_game_duration_timeout() -> void:
 	print("signal timeout")
-	GlobalScript.start_new_day()
-	
+	GlobalScript.shield -= GlobalScript.get_shield_damage()  # 3 → 2 → 1
 	GlobalScript.energy -= 1
 	GlobalScript.support -= 4
-	GlobalScript.shield -= 3
-	
-	day_number.text = str(GlobalScript.day)
-	life_sup_label.text = str(GlobalScript.support)
-	energy_label.text = str(GlobalScript.energy)
-	shields_label.text = str(GlobalScript.shield)
-	
-	
+	GlobalScript.start_new_day()  # al final, porque recarga la escena
 	pass # Replace with function body.
 	
 #RESOURCES PRODUCTION ------------------------------------------------------
@@ -113,12 +126,11 @@ func _on_science_duration_timeout() -> void:
 
 func _on_energy_duration_timeout() -> void:
 	print("energy working")
-	point_energy.show()
 	var cantidad = GlobalScript.area_counts.get("energyArea", 0)
 	if cantidad == 0:
 		return
-		
-	var produccion = roundi(cantidad * 4 * GlobalScript.get_energy_mult())  # 4 → 6 → 7
+	point_energy.show()
+	var produccion = roundi(cantidad * 2 * GlobalScript.get_energy_mult())  # 4 → 6 → 7
 	GlobalScript.prodEnergy += produccion
 	GlobalScript.energy += produccion
 	point_energy.text = "+" + str(GlobalScript.prodEnergy)
@@ -127,39 +139,44 @@ func _on_energy_duration_timeout() -> void:
 
 func _on_support_duration_timeout() -> void:
 	print("support working")
-	point_supp.show()
 	var cantidad = GlobalScript.area_counts.get("supportArea", 0)
 	if cantidad == 0:
 		return
-	GlobalScript.prodSupp += cantidad * 2 * GlobalScript.supportLevel
-	GlobalScript.support += cantidad * 2 * GlobalScript.supportLevel
+		
+	point_supp.show()
+	var produccion = roundi(cantidad * 1 * GlobalScript.get_support_mult())  # 1 → 2 → 3
+	GlobalScript.prodSupp += produccion
+	GlobalScript.support += produccion
 	GlobalScript.energy -= 1
 	point_supp.text = "+" + str(GlobalScript.prodSupp)
 	life_sup_label.text = str(GlobalScript.support)
 	energy_label.text = str(GlobalScript.energy)
-	pass # Replace with function body.
 
 
 func _on_shield_duration_timeout() -> void:
 	print("shields working")
-	point_shield.show()
 	var cantidad = GlobalScript.area_counts.get("shieldArea", 0)
 	if cantidad == 0:
 		return
-		
-	GlobalScript.shield += cantidad * 1 * GlobalScript.shieldLevel
-	GlobalScript.prodShield += cantidad * 1 * GlobalScript.shieldLevel
+	point_shield.show()
+	GlobalScript.shield += cantidad * 1      # ya no depende del nivel
+	GlobalScript.prodShield += cantidad * 1
 	GlobalScript.energy -= 1
 	point_shield.text = "+" + str(GlobalScript.prodShield)
 	shields_label.text = str(GlobalScript.shield)
 	energy_label.text = str(GlobalScript.energy)
-	pass # Replace with function body.
 	
 #UPDATE MENUS
 func _update_menus() -> void:
+	GlobalScript.inRocketMenu = not showingAstronauts
 	characters.visible = showingAstronauts
 	main_monitor_label.visible = showingAstronauts
 	menu_rocket.visible = not showingAstronauts
+
+	if GlobalScript.allAreasMax:
+		select_upgrade_label.show()
+		
+	print("menu visible: ", menu_rocket.visible, " | label visible en árbol: ", select_upgrade_label.is_visible_in_tree(), " | allAreasMax: ", GlobalScript.allAreasMax)
 
 #CHANGE MENUS
 func _on_next_menu_button_button_down() -> void:
@@ -167,21 +184,40 @@ func _on_next_menu_button_button_down() -> void:
 	_update_menus()
 	pass # Replace with function body.
 
-#UPGRADE SUPPORT
+#U	UPGRADE SUPPORT
 func _on_upgrade_support_button_button_down() -> void:
-	if GlobalScript.supportLevel < GlobalScript.MAX_LEVEL:
+	if GlobalScript.try_upgrade(GlobalScript.supportLevel):
 		GlobalScript.supportLevel += 1
-		print("Soporte nivel ", GlobalScript.supportLevel)
-	pass # Replace with function body.
+		science_label.text = str(GlobalScript.science)
+		_remove_maxed_buttons()
+		_check_all_maxed()
+
 
 func _on_upgrade_energy_button_down() -> void:
-	if GlobalScript.energyLevel < GlobalScript.MAX_LEVEL:
+	if GlobalScript.try_upgrade(GlobalScript.energyLevel):
 		GlobalScript.energyLevel += 1
-		print("energy nivel ", GlobalScript.energyLevel)
-	pass # Replace with function body.
+		science_label.text = str(GlobalScript.science)
+		_remove_maxed_buttons()
+		_check_all_maxed()
 	
 func _on_upgrade_shield_button_down() -> void:
-	if GlobalScript.shieldLevel < GlobalScript.MAX_LEVEL:
+	if GlobalScript.try_upgrade(GlobalScript.shieldLevel):
 		GlobalScript.shieldLevel += 1
-		print("shield nivel ", GlobalScript.shieldLevel)
-	pass # Replace with function body.
+		science_label.text = str(GlobalScript.science)
+		_remove_maxed_buttons()
+		_check_all_maxed()
+		
+func _remove_maxed_buttons() -> void:
+	if GlobalScript.supportLevel >= GlobalScript.MAX_LEVEL and is_instance_valid(upgrade_area_supp):
+		upgrade_area_supp.queue_free()
+	if GlobalScript.energyLevel >= GlobalScript.MAX_LEVEL and is_instance_valid(upgrade_area_energy):
+		upgrade_area_energy.queue_free()
+	if GlobalScript.shieldLevel >= GlobalScript.MAX_LEVEL and is_instance_valid(upgrade_area_shield):
+		upgrade_area_shield.queue_free()
+		
+func _check_all_maxed() -> void:
+	print("niveles: ", GlobalScript.supportLevel, GlobalScript.energyLevel, GlobalScript.shieldLevel)
+	if GlobalScript.all_upgrades_maxed() and not GlobalScript.allAreasMax:
+		GlobalScript.allAreasMax = true
+		not_upgraded_label.hide()
+		select_upgrade_label.show()

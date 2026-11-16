@@ -17,12 +17,13 @@ var day = 1
 var support = 8
 var energy = 6
 var shield = 10
-var science = 0
+var science = 100
 
 var maxSupport = 8
 var maxEnergy = 6
 var maxShield = 10
 
+#Producción de los recursos
 var prodScience = 0
 var prodSupp = 0
 var prodEnergy = 0
@@ -40,11 +41,19 @@ var shieldLevel = 1
 var area_counts := {}  # {"nombreDelArea": cantidad}
 
 const MAX_LEVEL := 3
+const UPGRADE_COST := [8, 12]
 
 # Índice 0 = nivel 1, índice 1 = nivel 2, índice 2 = nivel 3
-const ENERGY_MULT  := [1.0, 1.5, 1.75]   # producción de paneles
-const SUPPORT_MULT := [1.0, 2.0, 3.0]    # reciclaje de soporte vital
+const ENERGY_MULT  := [1.0, 1.25, 1.5]   # producción de paneles
+const SUPPORT_MULT := [1.0, 1.25, 1.5]    # reciclaje de soporte vital
 const SHIELD_DAMAGE := [3, 2, 1]         # daño máximo de radiación
+
+var inRocketMenu := false
+
+var allAreasMax = false
+
+#ROCKET STUFF
+var pointsForRocket = 45
 
 func _ready() -> void:
 	pass
@@ -121,3 +130,20 @@ func get_support_mult() -> float:
 
 func get_shield_damage() -> int:
 	return SHIELD_DAMAGE[shieldLevel - 1]
+	
+func get_upgrade_cost(level: int) -> int:
+	return UPGRADE_COST[level - 1]
+	
+func try_upgrade(level: int) -> bool:
+	if level >= MAX_LEVEL:
+		return false
+	var cost := get_upgrade_cost(level)
+	if science < cost:
+		return false
+	science -= cost
+	return true
+	
+func all_upgrades_maxed() -> bool:
+	return supportLevel >= MAX_LEVEL \
+		and energyLevel >= MAX_LEVEL \
+		and shieldLevel >= MAX_LEVEL

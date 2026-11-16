@@ -118,6 +118,10 @@ font_color = Color(0.8901961, 0.9607843, 0.8392157, 1)
 atlas = ExtResource("1_rku1e")
 region = Rect2(37, 33, 22, 29)
 
+[sub_resource type="LabelSettings" id="LabelSettings_ym3tv"]
+font = ExtResource("4_nnt18")
+font_size = 40
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_f3c8l"]
 atlas = ExtResource("5_exi56")
 region = Rect2(0, 16, 16, 16)
@@ -1362,7 +1366,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="selectUpgradeLabel" type="Label" parent="GUI/rocketMenu/menu" unique_id=1310111446]
-visible = false
 layout_mode = 0
 offset_right = 256.0
 offset_bottom = 88.0
@@ -1380,7 +1383,7 @@ offset_right = 192.0
 offset_bottom = 264.0
 color = Color(0.0065217167, 0.35101604, 0.010868261, 1)
 
-[node name="upgradeButton" type="Button" parent="GUI/rocketMenu/menu/selectUpgradeLabel" unique_id=1119986494]
+[node name="upgradeRocket" type="Button" parent="GUI/rocketMenu/menu/selectUpgradeLabel" unique_id=1119986494]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_left = 64.0
@@ -1400,11 +1403,12 @@ texture = SubResource("AtlasTexture_bu0y5")
 
 [node name="costLabel" type="Label" parent="GUI/rocketMenu/menu/selectUpgradeLabel" unique_id=810697720]
 layout_mode = 0
-offset_left = 88.0
-offset_top = 232.0
-offset_right = 128.0
-offset_bottom = 255.0
-text = "0000"
+offset_left = 96.0
+offset_top = 224.0
+offset_right = 127.0
+offset_bottom = 265.0
+text = "45"
+label_settings = SubResource("LabelSettings_ym3tv")
 
 [node name="scienceTexture" type="TextureRect" parent="GUI/rocketMenu/menu/selectUpgradeLabel" unique_id=287781033]
 texture_filter = 1
@@ -1445,9 +1449,9 @@ self_modulate = Color(1, 1, 1, 0)
 z_index = 2
 layout_mode = 0
 offset_left = 264.0
-offset_top = 584.0
+offset_top = 592.0
 offset_right = 304.0
-offset_bottom = 624.0
+offset_bottom = 632.0
 mouse_filter = 1
 mouse_default_cursor_shape = 2
 
