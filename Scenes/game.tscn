@@ -2,15 +2,19 @@
 
 [ext_resource type="Texture2D" uid="uid://pkxjqqej0lmt" path="res://Sprites/monitors.png" id="1_1phco"]
 [ext_resource type="Texture2D" uid="uid://4kycwkm0ffpc" path="res://Sprites/Edited/kosmonaut_apollo-edited.png" id="1_3dryh"]
+[ext_resource type="Script" uid="uid://bgp43a70550tn" path="res://Scripts/gui.gd" id="1_7t8sx"]
 [ext_resource type="Texture2D" uid="uid://50ioyfcg63do" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/tileset-bg-1-16x16.png" id="1_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://b27dj0jdkho6u" path="res://Sprites/Space/Star Textures.png" id="1_ldgsr"]
+[ext_resource type="Script" uid="uid://cu3qkj76cl703" path="res://Scripts/gameStatus.gd" id="1_mg4q0"]
 [ext_resource type="Texture2D" uid="uid://bxfd3oewgef7o" path="res://Sprites/Icons_Green.png" id="1_rku1e"]
 [ext_resource type="LabelSettings" uid="uid://b11qcjg1vwo46" path="res://Settings/labelStats.tres" id="2_rfjv2"]
 [ext_resource type="Texture2D" uid="uid://c4s444apronlb" path="res://Sprites/Edited/kosmonaut_girl-edited.png" id="2_wowpa"]
 [ext_resource type="Texture2D" uid="uid://qkeai0aoeb56" path="res://Sprites/Edited/kosmonaut_eva-edited.png" id="3_i6g32"]
 [ext_resource type="Texture2D" uid="uid://knv84cxo8ua6" path="res://Sprites/Edited/kosmonaut-edited.png" id="4_1l0tm"]
 [ext_resource type="FontFile" uid="uid://b16l63mi285k5" path="res://Fonts/m6x11plus.ttf" id="4_nnt18"]
+[ext_resource type="Texture2D" uid="uid://d2rpgsoi50eul" path="res://Sprites/Space/UI.png" id="5_exi56"]
 [ext_resource type="Texture2D" uid="uid://cfjxih8k2i7u0" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/animated tiles-water-blue-16x16.png" id="5_v158k"]
+[ext_resource type="Texture2D" uid="uid://cnp53orv1ee5v" path="res://Sprites/science.png" id="5_vm72l"]
 [ext_resource type="Texture2D" uid="uid://tbwu0vsua4ch" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/tileset-platforms-3-16x16.png" id="6_h4fw4"]
 [ext_resource type="Texture2D" uid="uid://d4luftph65cid" path="res://Sprites/Space/Planet Textures/GreenPlanet.png" id="6_rfjv2"]
 [ext_resource type="Texture2D" uid="uid://0s1fwr44plna" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/tileset-elevator-16x16.png" id="7_ldgsr"]
@@ -37,6 +41,10 @@ region = Rect2(7, 0, 18, 31)
 atlas = ExtResource("1_rku1e")
 region = Rect2(3, 35, 26, 23)
 
+[sub_resource type="LabelSettings" id="LabelSettings_tgy6u"]
+font = ExtResource("4_nnt18")
+font_size = 25
+
 [sub_resource type="LabelSettings" id="LabelSettings_rku1e"]
 font = ExtResource("4_nnt18")
 font_size = 35
@@ -47,9 +55,42 @@ font = ExtResource("4_nnt18")
 font_size = 35
 font_color = Color(0.89014935, 0.9626884, 0.8403069, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_mg4q0"]
+font = ExtResource("4_nnt18")
+font_size = 40
+font_color = Color(0.8901961, 0.9607843, 0.8392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vm72l"]
+font = ExtResource("4_nnt18")
+font_size = 40
+font_color = Color(0.8901961, 0.9607843, 0.8392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_22asu"]
+font = ExtResource("4_nnt18")
+font_size = 40
+font_color = Color(0.8901961, 0.9607843, 0.8392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fkdbe"]
+font = ExtResource("4_nnt18")
+font_size = 40
+font_color = Color(0.8901961, 0.9607843, 0.8392157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_81klo"]
+font = ExtResource("4_nnt18")
+font_size = 70
+
+[sub_resource type="LabelSettings" id="LabelSettings_cwurv"]
+font = ExtResource("4_nnt18")
+font_size = 40
+font_color = Color(0.8901961, 0.9607843, 0.8392157, 1)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ese38"]
 atlas = ExtResource("1_1phco")
 region = Rect2(1, 1, 30, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f3c8l"]
+atlas = ExtResource("5_exi56")
+region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldgsr"]
 texture = ExtResource("1_h4fw4")
@@ -744,7 +785,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"movingLeft",
-"speed": 2.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1021,12 +1062,14 @@ size = Vector2(80, 624)
 size = Vector2(1056, 32)
 
 [node name="Game" type="Node" unique_id=1568055481]
+script = ExtResource("1_mg4q0")
 
 [node name="GUI" type="Control" parent="." unique_id=280228737]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_7t8sx")
 
 [node name="monitors" type="Control" parent="GUI" unique_id=801914425]
 anchors_preset = 0
@@ -1036,8 +1079,8 @@ offset_bottom = 40.0
 [node name="monitorSmall" type="Sprite2D" parent="GUI/monitors" unique_id=1576140869]
 z_index = 1
 texture_filter = 1
-position = Vector2(199.99998, 156)
-scale = Vector2(11.733333, 15.529409)
+position = Vector2(203.99995, 156)
+scale = Vector2(14.133332, 15.529409)
 texture = SubResource("AtlasTexture_8m3t6")
 
 [node name="stats" type="Control" parent="GUI" unique_id=692434995]
@@ -1048,11 +1091,11 @@ offset_bottom = 40.0
 [node name="resources" type="GridContainer" parent="GUI/stats" unique_id=1645974378]
 texture_filter = 1
 layout_mode = 0
-offset_left = 62.0
-offset_top = 119.0
-offset_right = 340.0
-offset_bottom = 236.0
-columns = 3
+offset_left = 24.0
+offset_top = 120.0
+offset_right = 396.0
+offset_bottom = 240.0
+columns = 4
 
 [node name="lifeSupport" type="TextureRect" parent="GUI/stats/resources" unique_id=2065974218]
 z_index = 1
@@ -1075,6 +1118,14 @@ custom_minimum_size = Vector2(90, 90)
 layout_mode = 2
 texture = SubResource("AtlasTexture_22asu")
 
+[node name="science" type="TextureRect" parent="GUI/stats/resources" unique_id=1468125666]
+z_index = 1
+texture_filter = 1
+layout_mode = 2
+texture = ExtResource("5_vm72l")
+expand_mode = 3
+stretch_mode = 4
+
 [node name="lifeSupLabel" type="Label" parent="GUI/stats/resources" unique_id=438123276]
 z_index = 1
 layout_mode = 2
@@ -1094,6 +1145,13 @@ z_index = 1
 layout_mode = 2
 text = "10"
 label_settings = ExtResource("2_rfjv2")
+horizontal_alignment = 1
+
+[node name="scienceLabel" type="Label" parent="GUI/stats/resources" unique_id=498916041]
+z_index = 1
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_tgy6u")
 horizontal_alignment = 1
 
 [node name="labels" type="Control" parent="GUI" unique_id=1934828517]
@@ -1124,6 +1182,65 @@ text = "BEGIN YOUR DAY!"
 label_settings = SubResource("LabelSettings_1phco")
 horizontal_alignment = 1
 
+[node name="supportLabel" type="Label" parent="GUI/labels" unique_id=1467616305]
+texture_filter = 1
+layout_mode = 0
+offset_left = 600.0
+offset_top = 184.0
+offset_right = 840.0
+offset_bottom = 225.0
+text = "LIFE AND SUPPORT"
+label_settings = SubResource("LabelSettings_mg4q0")
+
+[node name="scienceLabel" type="Label" parent="GUI/labels" unique_id=736310017]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1168.0
+offset_top = 184.0
+offset_right = 1444.0
+offset_bottom = 225.0
+text = "SCIENCE LABORATORY"
+label_settings = SubResource("LabelSettings_vm72l")
+
+[node name="shieldLabel" type="Label" parent="GUI/labels" unique_id=266804914]
+texture_filter = 1
+layout_mode = 0
+offset_left = 1192.0
+offset_top = 520.0
+offset_right = 1452.0
+offset_bottom = 561.0
+text = "RADIATION SHIELDS"
+label_settings = SubResource("LabelSettings_22asu")
+
+[node name="energyLabel" type="Label" parent="GUI/labels" unique_id=857009561]
+texture_filter = 1
+layout_mode = 0
+offset_left = 632.0
+offset_top = 512.0
+offset_right = 803.0
+offset_bottom = 553.0
+text = "POWER PLANT"
+label_settings = SubResource("LabelSettings_fkdbe")
+
+[node name="dayNumber" type="Label" parent="GUI/labels" unique_id=1595192516]
+layout_mode = 0
+offset_left = 920.0
+offset_top = 8.0
+offset_right = 1013.0
+offset_bottom = 79.0
+text = "DAY"
+label_settings = SubResource("LabelSettings_81klo")
+
+[node name="eventLabel" type="Label" parent="GUI/labels" unique_id=664083010]
+texture_filter = 1
+layout_mode = 0
+offset_left = 768.0
+offset_top = 824.0
+offset_right = 1182.0
+offset_bottom = 865.0
+text = "EVENT IN COMING: SOLAR FLARE"
+label_settings = SubResource("LabelSettings_cwurv")
+
 [node name="mainMonitor" type="Control" parent="GUI" unique_id=2071721144]
 anchors_preset = 0
 offset_right = 40.0
@@ -1136,11 +1253,32 @@ position = Vector2(191.99998, 512)
 scale = Vector2(11.199999, 12.8)
 texture = SubResource("AtlasTexture_ese38")
 
+[node name="buttons" type="Control" parent="GUI" unique_id=237222855]
+z_index = 1
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="startButton" type="Button" parent="GUI/buttons" unique_id=1402853384]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 456.0
+offset_right = 248.0
+offset_bottom = 560.0
+mouse_default_cursor_shape = 2
+
+[node name="TextureRect" type="TextureRect" parent="GUI/buttons/startButton" unique_id=82983271]
+self_modulate = Color(0.4268094, 0.8064864, 0.4263617, 1)
+texture_filter = 1
+layout_mode = 0
+offset_right = 104.0
+offset_bottom = 104.0
+texture = SubResource("AtlasTexture_f3c8l")
+
 [node name="backgroundParallax" type="Parallax2D" parent="GUI" unique_id=888418679]
-scroll_offset = Vector2(2190, 17)
 repeat_size = Vector2(500, 0)
-autoscroll = Vector2(5, 0)
-repeat_times = 7
+autoscroll = Vector2(30, 0)
+repeat_times = 4
 
 [node name="texture" type="Sprite2D" parent="GUI/backgroundParallax" unique_id=1495870212]
 self_modulate = Color(0.1882353, 0.38431373, 0.101960786, 1)
@@ -1189,7 +1327,7 @@ texture_filter = 1
 position = Vector2(224, 608)
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_rfjv2")
-animation = &"idle"
+animation = &"movingLeft"
 script = ExtResource("12_nb51f")
 
 [node name="apolloArea" type="Area2D" parent="Characters/Apollo" unique_id=270961571]
@@ -1213,6 +1351,7 @@ scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_iivbl")
 animation = &"idle"
 script = ExtResource("16_85qyi")
+speed = 120.0
 
 [node name="chrisArea" type="Area2D" parent="Characters/Christina" unique_id=1792545302]
 
@@ -1278,6 +1417,7 @@ mouse_filter = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/supportArea" unique_id=349500946]
 position = Vector2(720, 288)
 shape = SubResource("RectangleShape2D_nnt18")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [node name="supportPosition" type="Node2D" parent="GameAreas/supportArea" unique_id=2080769325 groups=["slot"]]
 position = Vector2(736, 400)
@@ -1296,6 +1436,7 @@ position = Vector2(800, 400)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/scienceArea" unique_id=840663118]
 position = Vector2(1292, 288)
 shape = SubResource("RectangleShape2D_ewbju")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [node name="sciencePosition" type="Node2D" parent="GameAreas/scienceArea" unique_id=645524908 groups=["slot"]]
 position = Vector2(1312, 400)
@@ -1314,6 +1455,7 @@ position = Vector2(1184, 400)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/energyArea" unique_id=1324959374]
 position = Vector2(720, 624)
 shape = SubResource("RectangleShape2D_85qyi")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [node name="energyPosition" type="Node2D" parent="GameAreas/energyArea" unique_id=952326476 groups=["slot"]]
 position = Vector2(736, 736)
@@ -1332,6 +1474,7 @@ position = Vector2(800, 736)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GameAreas/shieldArea" unique_id=1362081176]
 position = Vector2(1296, 624)
 shape = SubResource("RectangleShape2D_iivbl")
+debug_color = Color(0, 0.6, 0.69803923, 0)
 
 [node name="shieldPosition" type="Node2D" parent="GameAreas/shieldArea" unique_id=1843798119 groups=["slot"]]
 position = Vector2(1312, 736)
@@ -1346,7 +1489,7 @@ position = Vector2(1248, 736)
 position = Vector2(1376, 736)
 
 [node name="outofbound" type="Area2D" parent="GameAreas" unique_id=1668218509 groups=["zone"]]
-modulate = Color(1, 1, 1, 0.17254902)
+modulate = Color(1, 1, 1, 0)
 
 [node name="col1" type="CollisionShape2D" parent="GameAreas/outofbound" unique_id=1339403537]
 position = Vector2(232, 384)
@@ -1395,9 +1538,20 @@ position = Vector2(224, 480)
 
 [node name="timers" type="Node" parent="." unique_id=1334601868]
 
-[node name="timerStartGame" type="Timer" parent="timers" unique_id=475727542]
-wait_time = 20.0
+[node name="gameDuration" type="Timer" parent="timers" unique_id=475727542]
+wait_time = 8.0
+one_shot = true
 
+[node name="scienceDuration" type="Timer" parent="timers" unique_id=771981740]
+
+[node name="energyDuration" type="Timer" parent="timers" unique_id=464424161]
+
+[node name="supportDuration" type="Timer" parent="timers" unique_id=1686835002]
+
+[node name="shieldDuration" type="Timer" parent="timers" unique_id=1356521681]
+
+[connection signal="moving_characters" from="GUI" to="Characters" method="_on_gui_moving_characters"]
+[connection signal="button_down" from="GUI/buttons/startButton" to="GUI" method="_on_start_button_button_down"]
 [connection signal="mouse_entered" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_entered"]
 [connection signal="mouse_exited" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_exited"]
 [connection signal="button_down" from="Characters/Apollo/Button" to="Characters/Apollo" method="_on_button_button_down"]
@@ -1414,3 +1568,8 @@ wait_time = 20.0
 [connection signal="mouse_exited" from="Characters/Frank/frankArea" to="Characters" method="_on_frank_area_mouse_exited"]
 [connection signal="button_down" from="Characters/Frank/frankButton" to="Characters/Frank" method="_on_frank_button_button_down"]
 [connection signal="button_up" from="Characters/Frank/frankButton" to="Characters/Frank" method="_on_frank_button_button_up"]
+[connection signal="timeout" from="timers/gameDuration" to="." method="_on_game_duration_timeout"]
+[connection signal="timeout" from="timers/scienceDuration" to="." method="_on_science_duration_timeout"]
+[connection signal="timeout" from="timers/energyDuration" to="." method="_on_energy_duration_timeout"]
+[connection signal="timeout" from="timers/supportDuration" to="." method="_on_support_duration_timeout"]
+[connection signal="timeout" from="timers/shieldDuration" to="." method="_on_shield_duration_timeout"]

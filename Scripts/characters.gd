@@ -9,9 +9,18 @@ extends Node2D
 @onready var mercury: AnimatedSprite2D = $Mercury
 @onready var frank: AnimatedSprite2D = $Frank
 
+@onready var button_apollo: Button = $Apollo/Button
+@onready var chris_button: Button = $Christina/chrisButton
+@onready var mercury_button: Button = $Mercury/mercuryButton
+@onready var frank_button: Button = $Frank/frankButton
+
+
+
 #dragCharacter
 var drag = false
 var offset = Vector2.ZERO
+
+var moving_charactersAnim = false
 
 func _process(delta: float) -> void:
 	
@@ -32,25 +41,14 @@ func _process(delta: float) -> void:
 		main_monitor_label.text = "BEGIN YOUR DAY!"
 		
 	#ANIMATIONS
-	if GlobalScript.apolloSelected:
-		apollo.play("moving")
+	if moving_charactersAnim:
+		for c in [apollo, mercury, christina, frank]:
+			c.play("movingLeft")
 	else:
-		apollo.play("idle")
-		
-	if GlobalScript.chrisSelected:
-		christina.play("moving")
-	else:
-		christina.play("idle")
-		
-	if GlobalScript.frankSelected:
-		frank.play("moving")
-	else:
-		frank.play("idle")
-		
-	if GlobalScript.mercurySelected:
-		mercury.play("moving")
-	else:
-		mercury.play("idle")
+		apollo.play("moving" if GlobalScript.apolloSelected else "idle")
+		christina.play("moving" if GlobalScript.chrisSelected else "idle")
+		mercury.play("moving" if GlobalScript.mercurySelected else "idle")
+		frank.play("moving" if GlobalScript.frankSelected else "idle")
 	
 
 #APOLLO FUNCTIONS -------------------------------------
@@ -90,4 +88,13 @@ func _on_frank_area_mouse_entered() -> void:
 
 func _on_frank_area_mouse_exited() -> void:
 	GlobalScript.frankSelected = false
+	pass # Replace with function body.
+
+func _on_gui_moving_characters() -> void:
+	moving_charactersAnim = true
+	GlobalScript.game_running = true #INICIA EL JUEGO COMO TAL
+	button_apollo.disabled = true
+	chris_button.disabled = true
+	mercury_button.disabled = true
+	frank_button.disabled = true
 	pass # Replace with function body.

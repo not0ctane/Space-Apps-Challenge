@@ -6,12 +6,36 @@ var frankSelected = false
 var mercurySelected = false
 
 var character_slots := {}
-
 var start_game = false
+var game_running = false
+
+const maxDays = 25
+
+var day = 1
+
+#Cantidad de recursos
+var support = 8
+var energy = 6
+var shield = 10
+var science = 0
+
+var maxSupport = 8
+var maxEnergy = 6
+var maxShield = 10
+
+#Nivel actual de cada mejora
+var supportLevel = 1
+var energyLevel = 1
+var shieldLevel = 1
+
+var area_counts := {}  # {"nombreDelArea": cantidad}
+
+
+func _ready() -> void:
+	pass
 
 
 func _process(delta: float) -> void:
-	
 	#This part starts the game
 	if character_slots.size() == 4 and not start_game:
 		print("game can start now!")
@@ -19,6 +43,32 @@ func _process(delta: float) -> void:
 		
 	if character_slots.size() < 4:
 		start_game = false
+		
+func start_new_day() -> void:
+
+# 2. Avanza el día
+	day += 1
+	if day > maxDays:
+		_end_game()
+		return
+
+	# 3. Reinicia el estado del turno
+	character_slots.clear()
+	_update_area_counts()
+	start_game = false
+	game_running = false
+	apolloSelected = false
+	chrisSelected = false
+	frankSelected = false
+	mercurySelected = false
+
+	# 4. Recarga la escena
+	get_tree().reload_current_scene()
+	
+func _end_game() -> void:
+	print("Game over, 25 days completed")
+	# aquí puedes cargar una escena de resultados
+
 
 func get_free_slots(area: Area2D) -> Array:
 	var libres := []
@@ -29,6 +79,19 @@ func get_free_slots(area: Area2D) -> Array:
 
 func claim_slot(slot: Node2D, character: Node) -> void:
 	character_slots[character] = slot
+	_update_area_counts()
 
 func release_slot(character: Node) -> void:
 	character_slots.erase(character)
+	_update_area_counts()
+	
+# HOW MANY ASTRONAUTS ARE PER AREA
+func _update_area_counts() -> void:
+	area_counts.clear()
+	
+	for area in get_tree().get_nodes_in_group("zone"):
+		area_counts[area.name] = 0
+	
+	for slot in character_slots.values():
+		var area_name = slot.get_parent().name
+		area_counts[area_name] += 1
