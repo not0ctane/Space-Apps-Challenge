@@ -1,0 +1,169 @@
+[gd_scene format=4 uid="uid://7wl4vy6lcyyn"]
+
+[ext_resource type="Texture2D" uid="uid://b27dj0jdkho6u" path="res://Sprites/Space/Star Textures.png" id="1_5j2cu"]
+[ext_resource type="Texture2D" uid="uid://cfjxih8k2i7u0" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/animated tiles-water-blue-16x16.png" id="2_02kpm"]
+[ext_resource type="Script" uid="uid://dlbckgqjjyfil" path="res://Scripts/rocket.gd" id="3_q5l5q"]
+[ext_resource type="Texture2D" uid="uid://d4luftph65cid" path="res://Sprites/Space/Planet Textures/GreenPlanet.png" id="3_ql4ve"]
+[ext_resource type="Texture2D" uid="uid://cxr03e58xrrfs" path="res://Sprites/rocket4.png" id="4_ql4ve"]
+[ext_resource type="FontFile" uid="uid://b16l63mi285k5" path="res://Fonts/m6x11plus.ttf" id="6_t3us6"]
+[ext_resource type="AudioStream" uid="uid://b33y152hxpiy8" path="res://Music and Sounds/203264__metrostock99__rocket-booster-raw-editable.wav" id="7_d0yn4"]
+[ext_resource type="AudioStream" uid="uid://bmfgc15saiuwc" path="res://Music and Sounds/credits_music.wav" id="8_kx0vo"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ql4ve"]
+particle_flag_disable_z = true
+angle_min = 720.0
+angle_max = 720.0
+angular_velocity_min = 719.99994
+angular_velocity_max = 719.99994
+radial_velocity_min = 182.79997
+radial_velocity_max = 182.79997
+gravity = Vector3(0, 500, 0)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q5l5q"]
+texture = ExtResource("2_02kpm")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_t3us6"]
+texture = ExtResource("3_ql4ve")
+
+[sub_resource type="TileSet" id="TileSet_d0yn4"]
+sources/0 = SubResource("TileSetAtlasSource_q5l5q")
+sources/1 = SubResource("TileSetAtlasSource_t3us6")
+
+[sub_resource type="LabelSettings" id="LabelSettings_d0yn4"]
+font = ExtResource("6_t3us6")
+font_size = 80
+font_color = Color(0.7400924, 0.97931224, 0.6477979, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_kx0vo"]
+font = ExtResource("6_t3us6")
+font_size = 60
+
+[node name="End" type="Node" unique_id=1076831684]
+
+[node name="backgroundParallax" type="Parallax2D" parent="." unique_id=478822659]
+repeat_size = Vector2(500, 0)
+autoscroll = Vector2(30, 0)
+repeat_times = 4
+
+[node name="texture" type="Sprite2D" parent="backgroundParallax" unique_id=1680629872]
+self_modulate = Color(0.1882353, 0.38431373, 0.101960786, 1)
+texture_filter = 1
+position = Vector2(1117.0001, 379.00003)
+scale = Vector2(17.882813, 17.020834)
+texture = ExtResource("1_5j2cu")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=2082787575]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Rocket" type="Sprite2D" parent="." unique_id=1402426542]
+self_modulate = Color(0.1882353, 0.38431373, 0.14901961, 1)
+texture_filter = 1
+position = Vector2(800.00006, 936)
+scale = Vector2(6, 6)
+texture = ExtResource("4_ql4ve")
+script = ExtResource("3_q5l5q")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Rocket" unique_id=937007371]
+self_modulate = Color(0.20521823, 0.7404122, 0, 1)
+position = Vector2(-1.0172526e-05, 26.666668)
+amount = 400
+collision_base_size = 0.0
+process_material = SubResource("ParticleProcessMaterial_ql4ve")
+
+[node name="Tiles" type="Node2D" parent="." unique_id=1884554987]
+
+[node name="ColorRect" type="ColorRect" parent="Tiles" unique_id=584193303]
+offset_top = 776.0
+offset_right = 1632.0
+offset_bottom = 912.0
+color = Color(0, 0, 0, 1)
+
+[node name="moonGround" type="TileMapLayer" parent="Tiles" unique_id=1554662810]
+self_modulate = Color(0.39215687, 0.7490196, 0.39215687, 1)
+texture_filter = 1
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAALABAAAAABAAAAAAAKABAAAAABAAAAAAAJABAAAAABAAAAAAAIABAAAAABAAAAAAAHABAAAAABAAAAAAAGABAAAAABAAAAAAAFABAAAAABAAAAAAAEABAAAAABAAAAAAADABAAAAABAAQAAAACABAAAAABAAQAAAABABAAAAABAAQAAAAAABAAAAAAAAAAAAAMABAAAAABAAAAAAANABAAAAABAAAAAAAOABAAAAABAAAAAAAPABAAAAABAAAAAAAQABAAAAABAAAAAAARABAAAAABAAAAAAASABAAAAABAAAAAAATABAAAAABAAAAAAAUABAAAAABAAAAAAAVABAAAAABAAAAAAAWABAAAAABAAAAAAAXABAAAAABAAAAAAAYABAAAAACAAAAAAAZABAAAAACAAAAAAAaABAAAAACAAAAAAAbABAAAAABAAAAAAAcABAAAAABAAAAAAAdABAAAAABAAAAAAAeABAAAAABAAAAAAAfABAAAAABAAAAAAAgABAAAAABAAAAAAAhABAAAAADAAQAAAAWABEAAAADAAMAAAAXABEAAAAAAAUAAAAYABEAAAABAAMAAAAZABEAAAAAAAUAAAAaABEAAAACAAUAAAAbABEAAAACAAUAAAAcABEAAAABAAMAAAAdABEAAAACAAUAAAAeABEAAAADAAUAAAAfABEAAAACAAUAAAAgABEAAAACAAUAAAAhABEAAAACAAUAAAACABEAAAACAAEAAAADABEAAAACAAEAAAAEABEAAAACAAEAAAAFABEAAAACAAEAAAAGABEAAAACAAEAAAAHABEAAAABAAMAAAAIABEAAAABAAMAAAAJABEAAAACAAMAAAARABIAAAACAAEAAAAQABIAAAACAAEAAAAPABIAAAACAAEAAAAOABIAAAABAAUAAAANABIAAAACAAEAAAAMABIAAAACAAEAAAALABIAAAABAAUAAAAIABIAAAAAAAUAAAAHABIAAAACAAMAAAAGABIAAAACAAEAAAAFABIAAAACAAEAAAAEABIAAAABAAMAAAADABIAAAACAAEAAAACABIAAAACAAEAAAABABIAAAABAAMAAAAAABIAAAACAAEAAAAAABEAAAABAAMAAAABABEAAAACAAEAAAAhABIAAAACAAUAAAAgABIAAAADAAUAAAAfABIAAAACAAUAAAAeABIAAAADAAUAAAAdABIAAAACAAUAAAAcABIAAAAAAAUAAAAbABIAAAAAAAUAAAAaABIAAAABAAMAAAAZABIAAAAAAAUAAAAYABIAAAAAAAUAAAAXABIAAAABAAUAAAAWABIAAAADAAMAAAAVABIAAAACAAMAAAAVABEAAAADAAMAAAAUABEAAAADAAMAAAATABEAAAACAAEAAAASABEAAAACAAEAAAARABEAAAACAAEAAAAQABEAAAABAAUAAAAPABEAAAACAAEAAAAOABEAAAABAAUAAAANABEAAAACAAEAAAAMABEAAAACAAUAAAALABEAAAABAAUAAAAKABEAAAACAAMAAAAKABIAAAACAAMAAAAJABIAAAACAAMAAAAUABIAAAACAAUAAAATABIAAAACAAEAAAASABIAAAACAAEAAAA=")
+tile_set = SubResource("TileSet_d0yn4")
+metadata/_edit_lock_ = true
+
+[node name="TimerKill" type="Timer" parent="." unique_id=520811842]
+wait_time = 10.0
+autostart = true
+
+[node name="end" type="Control" parent="." unique_id=574072657]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="labelEnd" type="Label" parent="end" unique_id=1014986820]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 48.0
+offset_right = 1457.0
+offset_bottom = 549.0
+text = "\"Somewhere, 
+something incredible is waiting to be known\"
+
+The astronauts are now on their way to mars
+
+Thank you for playing!"
+label_settings = SubResource("LabelSettings_d0yn4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="rocket" type="AudioStreamPlayer" parent="." unique_id=157261996]
+stream = ExtResource("7_d0yn4")
+
+[node name="endMusic" type="AudioStreamPlayer" parent="." unique_id=1265287646]
+stream = ExtResource("8_kx0vo")
+
+[node name="back" type="Button" parent="." unique_id=2049965895]
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 672.0
+offset_top = 640.0
+offset_right = 896.0
+offset_bottom = 704.0
+mouse_default_cursor_shape = 2
+
+[node name="Label" type="Label" parent="back" unique_id=2048394874]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "MAIN MENU"
+label_settings = SubResource("LabelSettings_kx0vo")
+
+[connection signal="timeout" from="TimerKill" to="Rocket" method="_on_timer_kill_timeout"]

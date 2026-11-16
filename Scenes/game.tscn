@@ -130,7 +130,7 @@ region = Rect2(0, 16, 16, 16)
 atlas = ExtResource("5_exi56")
 region = Rect2(32, 16, 16, 16)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ldgsr"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vm72l"]
 texture = ExtResource("1_h4fw4")
 0:0/0 = 0
 1:0/0 = 0
@@ -292,9 +292,9 @@ texture = ExtResource("1_h4fw4")
 19:8/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_o5yvi"]
-sources/0 = SubResource("TileSetAtlasSource_ldgsr")
+sources/0 = SubResource("TileSetAtlasSource_vm72l")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rku1e"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_22asu"]
 texture = ExtResource("5_v158k")
 0:0/0 = 0
 1:0/0 = 0
@@ -329,14 +329,14 @@ texture = ExtResource("5_v158k")
 2:7/0 = 0
 3:7/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ewbju"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fkdbe"]
 texture = ExtResource("6_rfjv2")
 
 [sub_resource type="TileSet" id="TileSet_rfjv2"]
-sources/0 = SubResource("TileSetAtlasSource_rku1e")
-sources/1 = SubResource("TileSetAtlasSource_ewbju")
+sources/0 = SubResource("TileSetAtlasSource_22asu")
+sources/1 = SubResource("TileSetAtlasSource_fkdbe")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1phco"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_81klo"]
 texture = ExtResource("6_h4fw4")
 0:0/0 = 0
 1:0/0 = 0
@@ -419,7 +419,7 @@ texture = ExtResource("6_h4fw4")
 7:7/0 = 0
 8:7/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nb51f"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tgy6u"]
 texture = ExtResource("7_ldgsr")
 1:0/0 = 0
 2:0/0 = 0
@@ -454,7 +454,7 @@ texture = ExtResource("7_ldgsr")
 1:8/0 = 0
 2:8/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nnt18"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cwurv"]
 texture = ExtResource("8_o5yvi")
 0:0/0 = 0
 1:0/0 = 0
@@ -761,9 +761,9 @@ texture = ExtResource("8_o5yvi")
 8:19/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_ewbju"]
-sources/0 = SubResource("TileSetAtlasSource_1phco")
-sources/1 = SubResource("TileSetAtlasSource_nb51f")
-sources/2 = SubResource("TileSetAtlasSource_nnt18")
+sources/0 = SubResource("TileSetAtlasSource_81klo")
+sources/1 = SubResource("TileSetAtlasSource_tgy6u")
+sources/2 = SubResource("TileSetAtlasSource_cwurv")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v158k"]
 atlas = ExtResource("1_3dryh")
@@ -1848,7 +1848,12 @@ one_shot = true
 
 [node name="shieldDuration" type="Timer" parent="timers" unique_id=1356521681]
 
+[node name="audio" type="Node" parent="." unique_id=55429382]
+
+[node name="beep1" type="AudioStreamPlayer" parent="audio" unique_id=662445566]
+
 [connection signal="moving_characters" from="GUI" to="Characters" method="_on_gui_moving_characters"]
+[connection signal="button_down" from="GUI/rocketMenu/menu/selectUpgradeLabel/upgradeRocket" to="." method="_on_upgrade_rocket_button_down"]
 [connection signal="button_down" from="GUI/buttons/startButton" to="GUI" method="_on_start_button_button_down"]
 [connection signal="button_down" from="GUI/buttons/nextMenuButton" to="." method="_on_next_menu_button_button_down"]
 [connection signal="mouse_entered" from="Characters/Apollo/apolloArea" to="Characters" method="_on_apollo_area_mouse_entered"]

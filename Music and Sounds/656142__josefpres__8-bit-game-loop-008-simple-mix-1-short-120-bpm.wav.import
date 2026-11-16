@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ltvune4m8wwd"
+path="res://.godot/imported/656142__josefpres__8-bit-game-loop-008-simple-mix-1-short-120-bpm.wav-132377d1a12d37fb7cda3d1a9ee06a7c.sample"
+
+[deps]
+
+source_file="res://Music and Sounds/656142__josefpres__8-bit-game-loop-008-simple-mix-1-short-120-bpm.wav"
+dest_files=["res://.godot/imported/656142__josefpres__8-bit-game-loop-008-simple-mix-1-short-120-bpm.wav-132377d1a12d37fb7cda3d1a9ee06a7c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

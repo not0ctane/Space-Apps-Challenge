@@ -17,7 +17,7 @@ var day = 1
 var support = 8
 var energy = 6
 var shield = 10
-var science = 100
+var science = 1000
 
 var maxSupport = 8
 var maxEnergy = 6

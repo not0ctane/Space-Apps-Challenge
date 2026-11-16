@@ -30,6 +30,7 @@ extends Node
 @onready var upgrade_area_energy: Control = $GameAreas/energyArea/upgradeAreaEnergy
 @onready var upgrade_area_shield: Control = $GameAreas/shieldArea/upgradeAreaShield
 
+@onready var cost_label: Label = $GUI/rocketMenu/menu/selectUpgradeLabel/costLabel
 
 #MENUS
 @onready var menu_rocket: ColorRect = $GUI/rocketMenu/menu
@@ -50,6 +51,11 @@ extends Node
 var gameDurationTimer = false
 
 var showingAstronauts = true
+
+var gameOver = false
+
+#AUDIO
+@onready var beep_1: AudioStreamPlayer = $audio/beep1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -88,6 +94,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	next_menu_button.show()
+	
+	if GlobalScript.pointsForRocket == 0:
+		get_tree().change_scene_to_file("res://Scenes/end.tscn")
+		
+	if GlobalScript.energy <= 0 or GlobalScript.support <= 0 or GlobalScript.shield <= 0 and not gameOver:
+		Music.stop()
+		gameOver = true
+		get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
+		
 	
 	if GlobalScript.game_running and not gameDurationTimer:
 		gameDurationTimer = true
@@ -221,3 +236,13 @@ func _check_all_maxed() -> void:
 		GlobalScript.allAreasMax = true
 		not_upgraded_label.hide()
 		select_upgrade_label.show()
+
+
+#ROCKET UPGRADES
+func _on_upgrade_rocket_button_down() -> void:
+	if GlobalScript.science >= 15:
+		GlobalScript.science -= 15
+		GlobalScript.pointsForRocket -= 15
+		science_label.text = str(GlobalScript.science)
+		cost_label.text = str(GlobalScript.pointsForRocket)
+	pass # Replace with function body.
