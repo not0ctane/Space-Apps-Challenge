@@ -47,7 +47,6 @@ extends Node
 #ROCKET MAIN
 @onready var select_upgrade_label: Label = $GUI/rocketMenu/menu/selectUpgradeLabel
 
-
 var gameDurationTimer = false
 
 var showingAstronauts = true
@@ -56,11 +55,20 @@ var gameOver = false
 
 #AUDIO
 @onready var beep_1: AudioStreamPlayer = $audio/beep1
+@onready var beep_2: AudioStreamPlayer = $audio/beep2
+@onready var beep_3: AudioStreamPlayer = $audio/beep3
+@onready var slam: AudioStreamPlayer = $audio/slam
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
+	slam.play()
+	
+	if not Music.playing:
+		Music.play()
+		
 	select_upgrade_label.hide()
 	
 	if GlobalScript.allAreasMax:
@@ -129,6 +137,8 @@ func _on_science_duration_timeout() -> void:
 	var cantidad = GlobalScript.area_counts.get("scienceArea", 0) #Nombre exácto del nodo NO OLVIDAR
 	if cantidad == 0: # Si no hay nadie no produce nada
 		return 
+		
+	beep_2.play()
 	point_science.show()
 	GlobalScript.science += cantidad * 2 #Cambiar el numero por su producción real
 	GlobalScript.prodScience += cantidad * 2 #Muestra la cantidad producida en el turno
@@ -144,6 +154,8 @@ func _on_energy_duration_timeout() -> void:
 	var cantidad = GlobalScript.area_counts.get("energyArea", 0)
 	if cantidad == 0:
 		return
+		
+	beep_2.play()
 	point_energy.show()
 	var produccion = roundi(cantidad * 2 * GlobalScript.get_energy_mult())  # 4 → 6 → 7
 	GlobalScript.prodEnergy += produccion
@@ -157,7 +169,7 @@ func _on_support_duration_timeout() -> void:
 	var cantidad = GlobalScript.area_counts.get("supportArea", 0)
 	if cantidad == 0:
 		return
-		
+	beep_2.play()
 	point_supp.show()
 	var produccion = roundi(cantidad * 1 * GlobalScript.get_support_mult())  # 1 → 2 → 3
 	GlobalScript.prodSupp += produccion
@@ -173,6 +185,8 @@ func _on_shield_duration_timeout() -> void:
 	var cantidad = GlobalScript.area_counts.get("shieldArea", 0)
 	if cantidad == 0:
 		return
+		
+	beep_2.play()
 	point_shield.show()
 	GlobalScript.shield += cantidad * 1      # ya no depende del nivel
 	GlobalScript.prodShield += cantidad * 1
@@ -202,6 +216,7 @@ func _on_next_menu_button_button_down() -> void:
 #U	UPGRADE SUPPORT
 func _on_upgrade_support_button_button_down() -> void:
 	if GlobalScript.try_upgrade(GlobalScript.supportLevel):
+		beep_3.play()
 		GlobalScript.supportLevel += 1
 		science_label.text = str(GlobalScript.science)
 		_remove_maxed_buttons()
@@ -210,6 +225,7 @@ func _on_upgrade_support_button_button_down() -> void:
 
 func _on_upgrade_energy_button_down() -> void:
 	if GlobalScript.try_upgrade(GlobalScript.energyLevel):
+		beep_3.play()
 		GlobalScript.energyLevel += 1
 		science_label.text = str(GlobalScript.science)
 		_remove_maxed_buttons()
@@ -217,6 +233,7 @@ func _on_upgrade_energy_button_down() -> void:
 	
 func _on_upgrade_shield_button_down() -> void:
 	if GlobalScript.try_upgrade(GlobalScript.shieldLevel):
+		beep_3.play()
 		GlobalScript.shieldLevel += 1
 		science_label.text = str(GlobalScript.science)
 		_remove_maxed_buttons()
@@ -241,6 +258,7 @@ func _check_all_maxed() -> void:
 #ROCKET UPGRADES
 func _on_upgrade_rocket_button_down() -> void:
 	if GlobalScript.science >= 15:
+		beep_2.play()
 		GlobalScript.science -= 15
 		GlobalScript.pointsForRocket -= 15
 		science_label.text = str(GlobalScript.science)

@@ -2,6 +2,8 @@ extends AnimatedSprite2D
 
 @onready var chris_area: Area2D = $chrisArea
 @onready var spawn_christina: Node2D = $"../../spawns/spawnChristina"
+@onready var beep_1: AudioStreamPlayer = $"../../audio/beep1"
+
 
 var drag = false
 var off = Vector2.ZERO
@@ -26,6 +28,7 @@ func _on_chris_button_button_down() -> void:
 	GlobalScript.release_slot(self)
 
 func _on_chris_button_button_up() -> void:
+	beep_1.play()
 	drag = false
 	for a in chris_area.get_overlapping_areas():
 		if a.is_in_group("outbound"):

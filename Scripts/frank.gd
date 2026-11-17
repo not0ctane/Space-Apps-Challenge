@@ -5,6 +5,7 @@ var off = Vector2.ZERO
 
 @onready var frank_area: Area2D = $frankArea
 @onready var spawn_frank: Node2D = $"../../spawns/spawnFrank"
+@onready var beep_1: AudioStreamPlayer = $"../../audio/beep1"
 
 #Movement variables
 @export var speed = 90.0
@@ -26,6 +27,7 @@ func _on_frank_button_button_down() -> void:
 
 
 func _on_frank_button_button_up() -> void:
+	beep_1.play()
 	drag = false
 	for a in frank_area.get_overlapping_areas():
 		if a.is_in_group("outbound"):

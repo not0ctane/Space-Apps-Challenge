@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 
 var drag = false
 var off = Vector2.ZERO
+@onready var beep_1: AudioStreamPlayer = $"../../audio/beep1"
 
 @onready var spawn_mercury: Node2D = $"../../spawns/spawnMercury"
 @onready var mercury_area: Area2D = $mercuryArea
@@ -24,6 +25,7 @@ func _on_mercury_button_button_down() -> void:
 	GlobalScript.release_slot(self)
 	
 func _on_mercury_button_button_up() -> void:
+	beep_1.play()
 	drag = false
 	for a in mercury_area.get_overlapping_areas():
 		if a.is_in_group("outbound"):

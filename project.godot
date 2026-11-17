@@ -10,10 +10,13 @@ config_version=5
 
 [application]
 
-config/name="Space Apps"
-run/main_scene="uid://p8hiavx015qm"
+config/name="Moon Base: Road To Mars"
+run/main_scene="uid://cq6tlsmeivmlp"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+run/max_fps=60
+boot_splash/image="uid://cxr03e58xrrfs"
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=100
 
 [autoload]
 

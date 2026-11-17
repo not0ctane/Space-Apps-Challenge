@@ -15,6 +15,7 @@ func _process(delta: float) -> void:
 
 
 func _on_restart_button_down() -> void:
+	GlobalScript.reset_game()
 	get_tree().change_scene_to_file("res://Scenes/game.tscn")
 	pass # Replace with function body.
 

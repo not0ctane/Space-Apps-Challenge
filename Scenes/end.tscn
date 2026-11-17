@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://7wl4vy6lcyyn"]
 
 [ext_resource type="Texture2D" uid="uid://b27dj0jdkho6u" path="res://Sprites/Space/Star Textures.png" id="1_5j2cu"]
+[ext_resource type="Script" uid="uid://b6sllqof3b7ni" path="res://Scripts/menuback.gd" id="1_iv03m"]
 [ext_resource type="Texture2D" uid="uid://cfjxih8k2i7u0" path="res://Sprites/Abandoned Outpost - 16x16 Sci-Fi Platformer Asset Pack/tilesets/animated tiles-water-blue-16x16.png" id="2_02kpm"]
 [ext_resource type="Script" uid="uid://dlbckgqjjyfil" path="res://Scripts/rocket.gd" id="3_q5l5q"]
 [ext_resource type="Texture2D" uid="uid://d4luftph65cid" path="res://Sprites/Space/Planet Textures/GreenPlanet.png" id="3_ql4ve"]
@@ -8,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://b16l63mi285k5" path="res://Fonts/m6x11plus.ttf" id="6_t3us6"]
 [ext_resource type="AudioStream" uid="uid://b33y152hxpiy8" path="res://Music and Sounds/203264__metrostock99__rocket-booster-raw-editable.wav" id="7_d0yn4"]
 [ext_resource type="AudioStream" uid="uid://bmfgc15saiuwc" path="res://Music and Sounds/credits_music.wav" id="8_kx0vo"]
+[ext_resource type="Shader" uid="uid://3xqm6bcw055k" path="res://globalShader.gdshader" id="10_076sf"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ql4ve"]
 particle_flag_disable_z = true
@@ -70,7 +72,34 @@ font_color = Color(0.7400924, 0.97931224, 0.6477979, 1)
 font = ExtResource("6_t3us6")
 font_size = 60
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pa61i"]
+shader = ExtResource("10_076sf")
+shader_parameter/overlay = true
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/brightness = 1.4
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 13.9010006602975
+shader_parameter/roll_variation = 2.28500010527762
+shader_parameter/distort_intensity = 0.0
+shader_parameter/aberration = 4.7499999933364734e-08
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 1.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/pixelate = true
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 1.5000000712500001
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_7vytj"]
+
 [node name="End" type="Node" unique_id=1076831684]
+script = ExtResource("1_iv03m")
 
 [node name="backgroundParallax" type="Parallax2D" parent="." unique_id=478822659]
 repeat_size = Vector2(500, 0)
@@ -91,7 +120,7 @@ offset_bottom = 40.0
 [node name="Rocket" type="Sprite2D" parent="." unique_id=1402426542]
 self_modulate = Color(0.1882353, 0.38431373, 0.14901961, 1)
 texture_filter = 1
-position = Vector2(800.00006, 936)
+position = Vector2(776, 936)
 scale = Vector2(6, 6)
 texture = ExtResource("4_ql4ve")
 script = ExtResource("3_q5l5q")
@@ -131,9 +160,9 @@ offset_bottom = 40.0
 
 [node name="labelEnd" type="Label" parent="end" unique_id=1014986820]
 layout_mode = 0
-offset_left = 160.0
+offset_left = 144.0
 offset_top = 48.0
-offset_right = 1457.0
+offset_right = 1441.0
 offset_bottom = 549.0
 text = "\"Somewhere, 
 something incredible is waiting to be known\"
@@ -153,17 +182,25 @@ stream = ExtResource("8_kx0vo")
 
 [node name="back" type="Button" parent="." unique_id=2049965895]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = 672.0
+offset_left = 696.0
 offset_top = 640.0
-offset_right = 896.0
+offset_right = 920.0
 offset_bottom = 704.0
 mouse_default_cursor_shape = 2
 
 [node name="Label" type="Label" parent="back" unique_id=2048394874]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = -24.0
+offset_right = 193.0
+offset_bottom = 60.0
 text = "MAIN MENU"
 label_settings = SubResource("LabelSettings_kx0vo")
 
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=827105767]
+material = SubResource("ShaderMaterial_pa61i")
+position = Vector2(799.75, 455.75006)
+scale = Vector2(1600.5, 912.5001)
+texture = SubResource("CanvasTexture_7vytj")
+
 [connection signal="timeout" from="TimerKill" to="Rocket" method="_on_timer_kill_timeout"]
+[connection signal="button_down" from="back" to="." method="_on_back_button_down"]

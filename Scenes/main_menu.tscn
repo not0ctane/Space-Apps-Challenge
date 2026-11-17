@@ -5,18 +5,11 @@
 [ext_resource type="FontFile" uid="uid://b16l63mi285k5" path="res://Fonts/m6x11plus.ttf" id="2_1ehe0"]
 [ext_resource type="Texture2D" uid="uid://btm44jmrvshhj" path="res://Sprites/Moon_Rotating_Sheet.png" id="3_ce3w2"]
 [ext_resource type="AudioStream" uid="uid://dik8pslueu737" path="res://Music and Sounds/727819__bloodpixelhero__adventure-theme-10.wav" id="5_opfnp"]
+[ext_resource type="Shader" uid="uid://3xqm6bcw055k" path="res://globalShader.gdshader" id="6_opfnp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_n45e2"]
 font = ExtResource("2_1ehe0")
 font_size = 100
-
-[sub_resource type="LabelSettings" id="LabelSettings_opfnp"]
-font = ExtResource("2_1ehe0")
-font_size = 60
-
-[sub_resource type="LabelSettings" id="LabelSettings_cp0ys"]
-font = ExtResource("2_1ehe0")
-font_size = 60
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yhxw7"]
 atlas = ExtResource("3_ce3w2")
@@ -250,6 +243,44 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_cp0ys"]
+font = ExtResource("2_1ehe0")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_opfnp"]
+font = ExtResource("2_1ehe0")
+font_size = 60
+
+[sub_resource type="LabelSettings" id="LabelSettings_yhxw7"]
+font = ExtResource("2_1ehe0")
+font_size = 40
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cp0ys"]
+shader = ExtResource("6_opfnp")
+shader_parameter/overlay = true
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/brightness = 1.4
+shader_parameter/scanlines_opacity = 0.4
+shader_parameter/scanlines_width = 0.25
+shader_parameter/grille_opacity = 0.3
+shader_parameter/roll = true
+shader_parameter/roll_speed = 1.0
+shader_parameter/roll_size = 13.9010006602975
+shader_parameter/roll_variation = 2.28500010527762
+shader_parameter/distort_intensity = 0.0
+shader_parameter/aberration = 4.7499999933364734e-08
+shader_parameter/noise_opacity = 0.4
+shader_parameter/noise_speed = 1.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/pixelate = true
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 1.5000000712500001
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/vignette_opacity = 0.5
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_yhxw7"]
+
 [node name="mainMenu" type="Node" unique_id=100934954]
 script = ExtResource("1_n45e2")
 
@@ -266,10 +297,10 @@ scale = Vector2(23.84766, 19.947914)
 texture = ExtResource("1_28flt")
 
 [node name="Label" type="Label" parent="." unique_id=1654461751]
-offset_left = 520.0
-offset_top = 40.0
-offset_right = 976.0
-offset_bottom = 349.0
+offset_left = 48.0
+offset_top = 80.0
+offset_right = 504.0
+offset_bottom = 389.0
 text = "MOON BASE
 
 ROAD TO MARS"
@@ -278,41 +309,26 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="start" type="Button" parent="." unique_id=1985690556]
-offset_left = 576.0
-offset_top = 400.0
-offset_right = 896.0
-offset_bottom = 472.0
-
-[node name="Label" type="Label" parent="start" unique_id=1858757916]
-layout_mode = 0
-offset_left = 40.0
-offset_top = 8.0
-offset_right = 274.0
-offset_bottom = 68.0
-text = "START GAME"
-label_settings = SubResource("LabelSettings_opfnp")
+self_modulate = Color(1, 1, 1, 0)
+offset_left = 120.0
+offset_top = 448.0
+offset_right = 440.0
+offset_bottom = 520.0
+mouse_default_cursor_shape = 2
 
 [node name="exit" type="Button" parent="." unique_id=175346692]
 self_modulate = Color(1, 1, 1, 0)
-offset_left = 576.0
-offset_top = 536.0
-offset_right = 896.0
-offset_bottom = 592.0
-
-[node name="Label" type="Label" parent="exit" unique_id=1220424577]
-layout_mode = 0
-offset_left = 48.0
-offset_top = -8.0
-offset_right = 262.0
-offset_bottom = 52.0
-text = "EXIT GAME"
-label_settings = SubResource("LabelSettings_cp0ys")
+offset_left = 128.0
+offset_top = 584.0
+offset_right = 448.0
+offset_bottom = 640.0
+mouse_default_cursor_shape = 2
 
 [node name="Moon" type="AnimatedSprite2D" parent="." unique_id=1592260713]
 self_modulate = Color(0.35367492, 0.68149686, 0.35359058, 1)
 texture_filter = 1
-position = Vector2(752, 840)
-scale = Vector2(7, 7)
+position = Vector2(1080, 408.00003)
+scale = Vector2(9, 9)
 sprite_frames = SubResource("SpriteFrames_ko05x")
 autoplay = "default"
 frame = 18
@@ -321,3 +337,36 @@ frame_progress = 0.51789325
 [node name="menuMusic" type="AudioStreamPlayer" parent="." unique_id=1296034885]
 stream = ExtResource("5_opfnp")
 autoplay = true
+
+[node name="Label2" type="Label" parent="." unique_id=1220424577]
+offset_left = 176.0
+offset_top = 576.0
+offset_right = 390.0
+offset_bottom = 636.0
+text = "EXIT GAME"
+label_settings = SubResource("LabelSettings_cp0ys")
+
+[node name="Label3" type="Label" parent="." unique_id=1858757916]
+offset_left = 168.0
+offset_top = 456.0
+offset_right = 402.0
+offset_bottom = 516.0
+text = "START GAME"
+label_settings = SubResource("LabelSettings_opfnp")
+
+[node name="Label4" type="Label" parent="." unique_id=1513471527]
+offset_left = 1208.0
+offset_top = 848.0
+offset_right = 1563.0
+offset_bottom = 889.0
+text = "MUSIC BY BLOODPIXELHERO"
+label_settings = SubResource("LabelSettings_yhxw7")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=788651338]
+material = SubResource("ShaderMaterial_cp0ys")
+position = Vector2(799.75, 455.75006)
+scale = Vector2(1600.5, 912.5001)
+texture = SubResource("CanvasTexture_yhxw7")
+
+[connection signal="button_down" from="start" to="." method="_on_start_button_down"]
+[connection signal="button_down" from="exit" to="." method="_on_exit_button_down"]

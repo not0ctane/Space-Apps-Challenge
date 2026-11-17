@@ -3,6 +3,9 @@ extends AnimatedSprite2D
 var drag = false
 var off = Vector2.ZERO
 
+@onready var beep_1: AudioStreamPlayer = $"../../audio/beep1"
+
+
 var speed = 90.0
 var direction = -1
 
@@ -30,7 +33,7 @@ func _on_button_button_down() -> void:
 
 # SLOT SYSTEM ----------------------------------------
 func _on_button_button_up() -> void:
-	
+	beep_1.play()
 	#DETECTS IF THE CHARACTER IS IN A WRONG AREA
 	drag = false
 	for a in apollo_area.get_overlapping_areas():

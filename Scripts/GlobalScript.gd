@@ -17,7 +17,7 @@ var day = 1
 var support = 8
 var energy = 6
 var shield = 10
-var science = 1000
+var science = 0
 
 var maxSupport = 8
 var maxEnergy = 6
@@ -54,6 +54,8 @@ var allAreasMax = false
 
 #ROCKET STUFF
 var pointsForRocket = 45
+
+var musicGlobalPlayin = true
 
 func _ready() -> void:
 	pass
@@ -147,3 +149,40 @@ func all_upgrades_maxed() -> bool:
 	return supportLevel >= MAX_LEVEL \
 		and energyLevel >= MAX_LEVEL \
 		and shieldLevel >= MAX_LEVEL
+		
+func reset_game() -> void:
+	# Día
+	day = 1
+
+	# Recursos
+	support = 8
+	energy = 6
+	shield = 10
+	science = 0  # el valor con el que empiezas
+
+	# Producción del turno
+	prodScience = 0
+	prodSupp = 0
+	prodEnergy = 0
+	prodShield = 0
+
+	# Niveles de mejora
+	supportLevel = 1
+	energyLevel = 1
+	shieldLevel = 1
+	allAreasMax = false
+
+	# Estado de la partida
+	character_slots.clear()
+	_update_area_counts()
+	start_game = false
+	game_running = false
+	inRocketMenu = false
+	apolloSelected = false
+	chrisSelected = false
+	frankSelected = false
+	mercurySelected = false
+	
+	pointsForRocket = 45
+	
+	musicGlobalPlayin = false
